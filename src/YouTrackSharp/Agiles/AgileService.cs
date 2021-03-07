@@ -55,5 +55,19 @@ namespace YouTrackSharp.Agiles
 
             return agileBoards;
         }
+        
+        /// <inheritdoc />
+        public async Task<Agile> GetAgileBoard(string boardId, bool verbose = false)
+        {
+            HttpClient client = await _connection.GetAuthenticatedHttpClient();
+
+            string fields = _fieldSyntaxEncoder.Encode(typeof(Agile), verbose);
+
+            HttpResponseMessage message = await client.GetAsync($"api/agiles/{boardId}?fields={fields}");
+            
+            string response = await message.Content.ReadAsStringAsync();
+
+            return JsonConvert.DeserializeObject<Agile>(response);
+        }
     }
 }

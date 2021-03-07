@@ -23,5 +23,20 @@ namespace YouTrackSharp.Agiles
         /// <returns>A <see cref="ICollection{T}"/> of available <see cref="Agile"/> boards</returns>
         /// <exception cref="T:System.Net.HttpRequestException">When the call to the remote YouTrack server instance failed.</exception>
         public Task<ICollection<Agile>> GetAgileBoards(bool verbose = false);
+        
+        /// <summary>
+        /// Retrieves an agile board from the server, with given id.
+        /// </summary>
+        /// <param name="boardId">Id of agile board</param>
+        /// <param name="verbose">
+        /// If the full representation of agile boards should be returned.
+        /// If this parameter is <c>false</c>, all the fields (and sub-fields) marked with the
+        /// <see cref="YouTrackSharp.SerializationAttributes.VerboseAttribute"/> are omitted (for more information, see
+        /// <see cref="Agile"/> and related classes).
+        /// </param>
+        /// <returns>Agile board with given id if it was found, <c>null</c> otherwise</returns>
+        /// <exception cref="T:System.Net.HttpRequestException">When the call to the remote YouTrack server instance failed.</exception>
+        public Task<Agile> GetAgileBoard(string boardId, bool verbose = false);
     }
+    
 }
