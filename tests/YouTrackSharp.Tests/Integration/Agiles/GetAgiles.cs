@@ -61,46 +61,6 @@ namespace YouTrackSharp.Tests.Integration.Agiles
                 await Assert.ThrowsAsync<UnauthorizedConnectionException>(
                     async () => await agileService.GetAgileBoards());
             }
-
-            [Fact]
-            public async Task Full_Agile_Json_Gets_Deserialized_Successfully()
-            {
-                // Arrange
-                IAgileService agileService = Connections.ConnectionStub(GetAgileJsonArray(1)).CreateAgileService();
-
-                // Act
-                ICollection<Agile> result = await agileService.GetAgileBoards(true);
-
-                // Assert
-                Assert.NotNull(result);
-                Assert.NotEmpty(result);
-
-                Agile demoBoard = result.FirstOrDefault();
-                Assert.NotNull(demoBoard);
-                Assert.Equal(DemoBoardId, demoBoard.Id);
-                Assert.Equal(DemoBoardNamePrefix, demoBoard.Name);
-
-                Assert.NotNull(demoBoard.ColumnSettings);
-                Assert.NotNull(demoBoard.Projects);
-                Assert.NotNull(demoBoard.Sprints);
-                Assert.NotNull(demoBoard.Projects);
-                Assert.NotNull(demoBoard.Sprints);
-                Assert.NotNull(demoBoard.Status);
-                Assert.NotNull(demoBoard.ColumnSettings);
-                Assert.NotNull(demoBoard.CurrentSprint);
-                Assert.NotNull(demoBoard.EstimationField);
-                Assert.NotNull(demoBoard.SprintsSettings);
-                Assert.NotNull(demoBoard.SwimlaneSettings);
-                Assert.NotNull(demoBoard.ColorCoding);
-                Assert.NotNull(demoBoard.UpdateableBy);
-                Assert.NotNull(demoBoard.VisibleFor);
-                Assert.NotNull(demoBoard.OriginalEstimationField);
-
-                Sprint sprint = demoBoard.Sprints.FirstOrDefault();
-                Assert.NotNull(sprint);
-                Assert.Equal(DemoSprintId, sprint.Id);
-                Assert.Equal(DemoSprintName, sprint.Name);
-            }
         }
     }
 }

@@ -19,7 +19,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Resources\FullAgile02.json" />
     <None Remove="Resources\agile.json" />
-    <EmbeddedResource Include="Resources\CompleteAgile.json" />
+    <EmbeddedResource Include="Resources\FullAgile01.json" />
   </ItemGroup>
 </Project>
