@@ -4,7 +4,7 @@ namespace YouTrackSharp.Agiles
 {
     /// <summary>
     /// Represents a sprint in the context of an agile board. The class only provides the sprint's id and name, see <see
-    /// cref="SprintService"/> for more info on how to access a YouTrack sprint.
+    /// cref="YouTrackSharp.Sprints.SprintsService.GetSprint"/> for more info on how to access a YouTrack sprint.
     /// </summary>
     public class Sprint
     {
