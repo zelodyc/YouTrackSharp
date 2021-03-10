@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
+using YouTrackSharp.Agiles;
 
 namespace YouTrackSharp.Tests.Infrastructure
 {

@@ -1,5 +1,8 @@
+using System;
 using Newtonsoft.Json;
 using System.Collections.Generic;
+using YouTrackSharp.Json;
+using YouTrackSharp.SerializationAttributes;
 
 namespace YouTrackSharp.Sprints {
   /// <summary>
@@ -28,14 +31,16 @@ namespace YouTrackSharp.Sprints {
     /// <summary>
     /// The start date of the sprint as a timestamp. Can be null.
     /// </summary>
+    [JsonConverter(typeof(UnixDateTimeOffsetConverter))]
     [JsonProperty("start")]
-    public long? Start { get; set; }
+    public DateTimeOffset? Start { get; set; }
 
     /// <summary>
     /// The end date of the sprint as a timestamp. Can be null.
     /// </summary>
+    [JsonConverter(typeof(UnixDateTimeOffsetConverter))]
     [JsonProperty("finish")]
-    public long? Finish { get; set; }
+    public DateTimeOffset? Finish { get; set; }
 
     /// <summary>
     /// Indicates whether the sprint is archived.
@@ -52,12 +57,14 @@ namespace YouTrackSharp.Sprints {
     /// <summary>
     /// Issues that are present on this sprint.
     /// </summary>
+    [Verbose]
     [JsonProperty("issues")]
     public List<Issue> Issues { get; set; }
 
     /// <summary>
     /// Number of unresolved issues on this sprint. Read-only.
     /// </summary>
+    [Verbose]
     [JsonProperty("unresolvedIssuesCount")]
     public int UnresolvedIssuesCount { get; set; }
 
@@ -65,7 +72,8 @@ namespace YouTrackSharp.Sprints {
     /// If you provide this attribute when you create a new sprint, then all unresolved issues from this sprint will be
     /// moved to the newly created sprint.
     /// </summary>
+    [Verbose]
     [JsonProperty("previousSprint")]
-    public Sprint PreviousSprint { get; set; }
+    public PreviousSprint PreviousSprint { get; set; }
   }
 }

@@ -1,0 +1,30 @@
+{
+  "_comment": "Represents a fully populated Sprint",
+  "issues":[
+    {
+      "id": "109-10",
+      "summary": "Issue 0",
+      "numberInProject": 0
+    },
+    {
+      "id": "109-11",
+      "summary": "Issue 1",
+      "numberInProject": 1
+    },
+    {
+      "id": "109-12",
+      "summary": "Issue 2",
+      "numberInProject": 2
+    }
+  ],
+  "start":1615359691762,
+  "isDefault":true,
+  "archived":false,
+  "goal":"Goal",
+  "finish":1615359720288,
+  "unresolvedIssuesCount":3,
+  "previousSprint":null,
+  "name":"First sprint",
+  "id":"109-2",
+  "$type":"Sprint"
+}

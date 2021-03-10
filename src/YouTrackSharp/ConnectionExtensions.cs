@@ -5,6 +5,7 @@ using YouTrackSharp.Internal;
 using YouTrackSharp.Issues;
 using YouTrackSharp.Management;
 using YouTrackSharp.Projects;
+using YouTrackSharp.Sprints;
 using YouTrackSharp.TimeTracking;
 
 namespace YouTrackSharp
@@ -96,6 +97,16 @@ namespace YouTrackSharp
         public static IAgileBoardService CreateAgileBoardService(this Connection connection)
         {
             return new AgileBoardService(connection);
+        }
+
+        /// <summary>
+        /// Creates a <see cref="ISprintService"/>.
+        /// </summary>
+        /// <param name="connection">The <see cref="Connection" /> to create a service with.</param>
+        /// <returns><see cref="ISprintService" /> for working with YouTrack agile sprints.</returns>
+        public static ISprintsService CreateSprintService(this Connection connection)
+        {
+            return new SprintsService(connection, new FieldSyntaxEncoder());
         }
     }
 }
