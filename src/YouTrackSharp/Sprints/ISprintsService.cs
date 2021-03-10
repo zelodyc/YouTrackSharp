@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace YouTrackSharp.Sprints
@@ -24,5 +25,20 @@ namespace YouTrackSharp.Sprints
         /// <exception cref="T:System.Net.HttpRequestException">When the call to the remote YouTrack server instance
         /// failed.</exception>
         public Task<Sprint> GetSprint(string boardId, string sprintId, bool verbose = false);
+
+        /// <summary>
+        /// Retrieves all the sprints of given agile board.
+        /// </summary>
+        /// <param name="boardId">Agile board id</param>
+        /// <param name="verbose">
+        /// If the full representation of the sprints should be returned.
+        /// If this parameter is <c>false</c>, all the fields (and sub-fields) marked with the
+        /// <see cref="YouTrackSharp.SerializationAttributes.VerboseAttribute"/> are omitted (for more information, see
+        /// <see cref="Sprint"/> and related classes).
+        /// </param>
+        /// <returns>All sprints from given agile board</returns>
+        /// <exception cref="T:System.Net.HttpRequestException">When the call to the remote YouTrack server instance
+        /// failed.</exception>
+        Task<List<Sprint>> GetSprints(string boardId, bool verbose = false);
     }
 }

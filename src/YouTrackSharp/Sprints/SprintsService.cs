@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
@@ -32,17 +33,52 @@ namespace YouTrackSharp.Sprints
         /// <inheritdoc />
         public async Task<Sprint> GetSprint(string boardId, string sprintId, bool verbose = false)
         {
+            string fields = _fieldSyntaxEncoder.Encode(typeof(Sprint), verbose);
+            string uri = $"api/agiles/{boardId}/sprints/{sprintId}?fields={fields}";
+
+            return await ExecuteQuery<Sprint>(uri);
+        }
+
+        /// <inheritdoc />
+        public async Task<List<Sprint>> GetSprints(string boardId, bool verbose = false)
+        {
             using HttpClient client = await _connection.GetAuthenticatedHttpClient();
 
             string fields = _fieldSyntaxEncoder.Encode(typeof(Sprint), verbose);
+            
+            const int batchSize = 10;
+            List<Sprint> sprints = new List<Sprint>();
+            List<Sprint> currentBatch;
 
-            HttpResponseMessage message = await client.GetAsync($"api/agiles/{boardId}/sprints/{sprintId}?fields={fields}");
+            do
+            {
+                string uri = $"api/agiles/{boardId}/sprints?fields={fields}&$top={batchSize}&$skip={sprints.Count}";
+
+                currentBatch = await ExecuteQuery<List<Sprint>>(uri, client);
+                sprints.AddRange(currentBatch);
+            } while (currentBatch.Count == batchSize);
+
+            return sprints;
+        }
+
+        private async Task<TResult> ExecuteQuery<TResult>(string uri)
+        {
+            using HttpClient client = await _connection.GetAuthenticatedHttpClient();
+
+            return await ExecuteQuery<TResult>(uri, client);
+        }
+        
+        private async Task<TResult> ExecuteQuery<TResult>(string uri, HttpClient client)
+        {
+            HttpResponseMessage message = await client.GetAsync(uri);
+
+            message.EnsureSuccessStatusCode();
 
             string response = await message.Content.ReadAsStringAsync();
 
-            Sprint sprint = JsonConvert.DeserializeObject<Sprint>(response);
+            TResult result = JsonConvert.DeserializeObject<TResult>(response);
 
-            return sprint;
-        }
+            return result;
+        } 
     }
 }

@@ -1,14 +1,19 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Threading.Tasks;
 using Xunit;
+using YouTrackSharp.Agiles;
 using YouTrackSharp.Sprints;
 using YouTrackSharp.Tests.Infrastructure;
+using Sprint = YouTrackSharp.Sprints.Sprint;
 
 namespace YouTrackSharp.Tests.Integration.Sprints
 {
     public partial class SprintsServiceTests
-    {
+    { 
         public class GetSprint
         {
             [Fact]
