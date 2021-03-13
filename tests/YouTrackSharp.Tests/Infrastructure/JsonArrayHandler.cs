@@ -15,8 +15,9 @@ namespace YouTrackSharp.Tests.Infrastructure
     /// </summary>
     public class JsonArrayHandler : HttpClientHandler
     {
-        private readonly ICollection<string> _jsonObjects;
         public int RequestsReceived { get; private set; }
+		
+		private readonly ICollection<string> _jsonObjects;
 
         /// <summary>
         /// Creates an instance of <see cref="JsonArrayHandler"/>

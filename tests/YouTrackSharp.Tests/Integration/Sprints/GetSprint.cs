@@ -1,14 +1,7 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Threading.Tasks;
 using Xunit;
-using YouTrackSharp.Agiles;
 using YouTrackSharp.Sprints;
 using YouTrackSharp.Tests.Infrastructure;
-using Sprint = YouTrackSharp.Sprints.Sprint;
 
 namespace YouTrackSharp.Tests.Integration.Sprints
 {
@@ -20,9 +13,7 @@ namespace YouTrackSharp.Tests.Integration.Sprints
             public async void Mock_Connection_Returns_Full_Sprint()
             {
                 string json = FullSprint;
-                HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.OK);
-                response.Content = new StringContent(json);
-                ConnectionStub connection = new ConnectionStub(_ => response);
+                ConnectionStub connection = new ConnectionStub(new JsonHandler(json));
 
                 ISprintsService agileService = connection.CreateSprintService();
                 Sprint sprint = await agileService.GetSprint("", "", true);
