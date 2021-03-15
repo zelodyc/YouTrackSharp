@@ -23,7 +23,7 @@ namespace YouTrackSharp.Tests.Infrastructure
 
         public static Connection Demo3Token => 
             new BearerTokenConnection(ServerUrl, "perm:ZGVtbzM=.WW91VHJhY2tTaGFycA==.L04RdcCnjyW2UPCVg1qyb6dQflpzFy", ConfigureTestsHandler);
-        
+
         public static class TestData
         {
             public static readonly List<object[]> ValidConnections
