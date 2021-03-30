@@ -24,6 +24,9 @@ namespace YouTrackSharp.Tests.Infrastructure
         public static Connection Demo3Token => 
             new BearerTokenConnection(ServerUrl, "perm:ZGVtbzM=.WW91VHJhY2tTaGFycA==.L04RdcCnjyW2UPCVg1qyb6dQflpzFy", ConfigureTestsHandler);
 
+        public static Connection Demo4Token =>
+            new BearerTokenConnection("https://zelodyc.myjetbrains.com/youtrack/", "perm:RGVtb19Vc2Vy.NDYtMQ==.tJo3zBOU6XpQhvCf1u6sT1xhDuFFZW", ConfigureTestsHandler);
+        
         public static class TestData
         {
             public static readonly List<object[]> ValidConnections

@@ -24,5 +24,14 @@ namespace YouTrackSharp.Sprints {
     /// </summary>
     [JsonProperty("numberInProject")]
     public long NumberInProject { get; set; }
+
+    /// <summary>
+    /// Disables serialization of readonly field <see cref="NumberInProject"/>
+    /// </summary>
+    /// <returns><c>false</c></returns>
+    public bool ShouldSerializeNumberInProject()
+    {
+        return false;
+    }
   }
 }

@@ -75,5 +75,32 @@ namespace YouTrackSharp.Sprints {
     [Verbose]
     [JsonProperty("previousSprint")]
     public PreviousSprint PreviousSprint { get; set; }
+
+    /// <summary>
+    /// Disables the serialization of readonly field <see cref="UnresolvedIssuesCount"/>
+    /// </summary>
+    /// <returns><c>false</c></returns>
+    public bool ShouldSerializeUnresolvedIssuesCount()
+    {
+        return false;
+    }
+
+    /// <summary>
+    /// Disables the serialization of read-only field <see cref="Id"/>
+    /// </summary>
+    /// <returns><c>false</c></returns>
+    public bool ShouldSerializeId()
+    {
+        return false;
+    }
+    
+    /// <summary>
+    /// Disables the serialization of <see cref="Issues"/>, which are set separately
+    /// </summary>
+    /// <returns><c>false</c></returns>
+    public bool ShouldSerializeIssues()
+    {
+        return false;
+    }
   }
 }
