@@ -45,7 +45,7 @@ namespace YouTrackSharp.Sprints
         /// <inheritdoc />
         public async Task<List<Sprint>> GetSprints(string boardId, bool verbose = false)
         {
-            using HttpClient client = await _connection.GetAuthenticatedHttpClient();
+            HttpClient client = await _connection.GetAuthenticatedHttpClient();
 
             string fields = _fieldSyntaxEncoder.Encode(typeof(Sprint), verbose);
             
@@ -110,7 +110,7 @@ namespace YouTrackSharp.Sprints
                 throw new ArgumentNullException(nameof(sprintId));
             }
 
-            using HttpClient client = await _connection.GetAuthenticatedHttpClient();
+            HttpClient client = await _connection.GetAuthenticatedHttpClient();
             HttpResponseMessage message = await client.DeleteAsync($"api/agiles/{boardId}/sprints/{sprintId}");
             
             if (message.StatusCode == HttpStatusCode.NotFound)
@@ -123,7 +123,7 @@ namespace YouTrackSharp.Sprints
 
         private async Task<TResult> ExecuteQuery<TResult>(string uri)
         {
-            using HttpClient client = await _connection.GetAuthenticatedHttpClient();
+            HttpClient client = await _connection.GetAuthenticatedHttpClient();
 
             return await ExecuteQuery<TResult>(uri, client);
         }
